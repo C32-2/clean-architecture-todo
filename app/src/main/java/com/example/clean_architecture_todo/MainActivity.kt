@@ -3,45 +3,27 @@ package com.example.clean_architecture_todo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.clean_architecture_todo.ui.theme.CleanarchitecturetodoTheme
+import com.example.clean_architecture_todo.data.local.TodoJsonDataSource
+import com.example.clean_architecture_todo.data.repository.TodoRepositoryImpl
+import com.example.clean_architecture_todo.domain.use_case.GetTodosUseCase
+import com.example.clean_architecture_todo.domain.use_case.ToggleTodoUseCase
+import com.example.clean_architecture_todo.navigation.NavGraph
+import com.example.clean_architecture_todo.presentation.viewmodel.TodoViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
+        val dataSource = TodoJsonDataSource(this)
+        val repository = TodoRepositoryImpl(dataSource)
+
+        val getTodosUseCase = GetTodosUseCase(repository)
+        val toggleTodoUseCase = ToggleTodoUseCase(repository)
+
+        val viewModel = TodoViewModel(getTodosUseCase, toggleTodoUseCase)
+
         setContent {
-            CleanarchitecturetodoTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+            NavGraph(viewModel)
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    CleanarchitecturetodoTheme {
-        Greeting("Android")
     }
 }
