@@ -16,5 +16,17 @@
     "title": "Сделать ДЗ по Android",
     "description": "Clean Architecture + Compose",
     "isCompleted": false
+  },
+  {
+    "id": 4,
+    "title": "МЕТАЛ ИГРАТЬ",
+    "description": "Pantera, Black Label Society, Down",
+    "isCompleted": false
+  },
+  {
+    "id": 5,
+    "title": "ЯПОНСКИЙ УЧИТЬ",
+    "description": "60 МИНУТ",
+    "isCompleted": false
   }
 ]

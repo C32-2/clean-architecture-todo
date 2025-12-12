@@ -14,7 +14,9 @@ import com.example.clean_architecture_todo.domain.model.TodoItem
 
 @Composable
 fun TodoDetailScreen(todo: TodoItem, onBack: () -> Unit) {
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(modifier = Modifier
+        .padding(top = 64.dp, start = 16.dp, end = 16.dp)
+    ) {
         Text(todo.title, style = MaterialTheme.typography.headlineMedium)
         Spacer(Modifier.height(8.dp))
         Text(todo.description)

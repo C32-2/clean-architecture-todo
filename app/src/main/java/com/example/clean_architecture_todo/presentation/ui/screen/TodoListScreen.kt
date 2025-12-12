@@ -28,7 +28,11 @@ fun TodoListScreen(
 ) {
     val todos by viewModel.todos.collectAsState()
 
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 64.dp, start = 16.dp, end = 16.dp)
+    ) {
         items(todos) { todo ->
             Row(
                 modifier = Modifier
